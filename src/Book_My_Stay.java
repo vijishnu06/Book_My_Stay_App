@@ -2,27 +2,81 @@
 
 public class Book_My_Stay {
 
-    /**
-     * The main method is the starting point of the Java application.
-     * The JVM calls this method automatically when the program runs.
-     *
-     * @param args Command-line arguments passed to the program
-     */
     public static void main(String[] args) {
 
-        // Application Name and Version
-        String appName = "Hotel Booking System";
-        String version = "v1.0";
+        // Creating room objects using polymorphism
+        Room singleRoom = new SingleRoom();
+        Room doubleRoom = new DoubleRoom();
+        Room suiteRoom = new SuiteRoom();
 
-        // Print welcome message to console
-        System.out.println("=================================");
-        System.out.println("Welcome to " + appName);
-        System.out.println("Application Version: " + version);
-        System.out.println("=================================");
+        // Static availability variables
+        int singleRoomAvailable = 5;
+        int doubleRoomAvailable = 3;
+        int suiteRoomAvailable = 2;
 
-        // Inform user that application started successfully
-        System.out.println("Application started successfully!");
+        System.out.println("===== HOTEL ROOM AVAILABILITY =====");
 
-        // Program terminates after execution
+        singleRoom.displayRoomDetails();
+        System.out.println("Available Rooms: " + singleRoomAvailable);
+        System.out.println();
+
+        doubleRoom.displayRoomDetails();
+        System.out.println("Available Rooms: " + doubleRoomAvailable);
+        System.out.println();
+
+        suiteRoom.displayRoomDetails();
+        System.out.println("Available Rooms: " + suiteRoomAvailable);
+        System.out.println();
+
+        System.out.println("===================================");
+    }
+}
+
+
+abstract class Room {
+
+    protected String roomType;
+    protected int numberOfBeds;
+    protected int size;
+    protected double price;
+
+
+    public Room(String roomType, int numberOfBeds, int size, double price) {
+        this.roomType = roomType;
+        this.numberOfBeds = numberOfBeds;
+        this.size = size;
+        this.price = price;
+    }
+
+
+    public void displayRoomDetails() {
+        System.out.println("Room Type: " + roomType);
+        System.out.println("Beds: " + numberOfBeds);
+        System.out.println("Size: " + size + " sq.ft");
+        System.out.println("Price per Night: $" + price);
+    }
+}
+
+
+class SingleRoom extends Room {
+
+    public SingleRoom() {
+        super("Single Room", 1, 200, 100.0);
+    }
+}
+
+
+class DoubleRoom extends Room {
+
+    public DoubleRoom() {
+        super("Double Room", 2, 350, 180.0);
+    }
+}
+
+
+class SuiteRoom extends Room {
+
+    public SuiteRoom() {
+        super("Suite Room", 3, 600, 350.0);
     }
 }
